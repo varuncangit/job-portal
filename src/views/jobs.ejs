@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="jobs-flex-container">
+    <% if(jobs) { %>
+      <% jobs.forEach(job=>{%>
+        <div class="card medium sticky-action">
+          <div class="card-image waves-effect waves-block waves-light">
+            <!-- <img class="activator" src="images/h1.svg"> -->
+            <% if(job.companyImage){  %>
+              <img class="activator" src="/images/<%= job.companyImage %>">
+          <% } else { %>
+            <img class="activator" src="/images/logo_nil.svg">
+          <% } %>
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">
+
+              <i class="material-icons right">info</i>
+              <strong>
+                <%= job.companyName %>
+              </strong>
+
+            </span>
+            <p>
+            <div class="card-title-center">
+              <div class="title-details">
+                <i class="material-icons">location_on</i>
+                <em>
+                  <%= job.jobLocation %>
+                </em> &nbsp;&nbsp;
+                <span class="">
+                  <%= job.designation %>
+                </span>
+              </div>
+              <div>
+                <% if(calculateRemainingDays(job.lastDate)==='ended'){ %>
+                  <span class="tag is-danger">&nbsp;Ended
+                  </span>
+                  <% } else { %>
+                    <span class="tag is-primary">&nbsp;Active
+                  </span>
+                  <% } %>
+              </div>
+            </div>
+            </p>
+
+          </div>
+          <div class="card-action">
+          <a href="/jobs/<%=job.id%>"><button type="submit">More details</button></a>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+              <%= job.companyName %><i class="material-icons right">close</i>
+            </span>
+            <p> <strong>Type :&nbsp;</strong>
+              <%= job.category %>
+            </p>
+            <p><strong>Job :&nbsp;</strong>
+              <%= job.designation %>
+            </p>
+            <p><strong>Salary :&nbsp;</strong>upto ₹<%= job.salary %>
+            </p>
+            <p><strong>Skills :&nbsp;</strong>
+              <% job.skills.forEach(skill=>{ %>
+                <span class="tag is-success">
+                  <%= skill %>
+                </span>
+                <% }) %>
+            </p>
+          </div>
+        </div>
+
+        <% }) %>
+          <% } %>
+  </div>
+</div>
